@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 2021_03_06_040534) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "user_name", default: "", null: false
+    t.string "profile", default: "", null: false
+    t.string "affiliation", default: "", null: false
+    t.string "position", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -28,8 +32,12 @@ ActiveRecord::Schema.define(version: 2021_03_06_040534) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["affiliation"], name: "index_users_on_affiliation", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["position"], name: "index_users_on_position", unique: true
+    t.index ["profile"], name: "index_users_on_profile", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 
 end
