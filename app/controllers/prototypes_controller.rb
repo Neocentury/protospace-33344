@@ -31,7 +31,7 @@ end
 
 private
 def prototype_params
-  params.require(:Prototype).permit(:name, :image, :text)
+  params.require(:Prototype).permit(:content, :image).merge(user_id: current_user.id)
 end
 
 def set_tweet
