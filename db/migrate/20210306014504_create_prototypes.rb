@@ -6,5 +6,6 @@ class CreatePrototypes < ActiveRecord::Migration[6.0]
       t.text :concept
       t.text :catch_copy
       t.timestamps
+    end
   end
 end

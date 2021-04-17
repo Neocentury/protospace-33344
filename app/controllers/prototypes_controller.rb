@@ -9,51 +9,51 @@ class PrototypesController < ApplicationController
 
  def new
   @prototype = Prototype.new
-end
+ end
 
-def create
-  @prototype=Prototype.new(prototype_params)
-  if @prototype.save
-    redirect_to root_path
-  else
-    render :new
+  def create
+    @prototype = Prototype.new(prototype_params)
+    if @prototype.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
-end
 
-def show
+ def show
   @comment = Comment.new
   @comments = @prototype.comments
-end
-
-def edit
-end
-
-def update
- if @prototype.update(prototype_params)
-  redirect_to prototype_path(@prototype)
- else
-  render :edit
  end
-end
 
-def destroy
+ def edit
+ end
+
+ def update
+  if @prototype.update(prototype_params)
+  redirect_to prototype_path(@prototype)
+  else
+  render :edit
+  end
+ end
+
+ def destroy
   if @prototype.destroy
     redirect_to root_path
   else
    redirect_to root_path
   end
-end
+ end
 
-private
-def prototype_params
+ private
+ def prototype_params
   params.require(:prototype).permit(:title, :catch_copy, :concept, :image ).merge(user_id: current_user.id)
-end
+ end
 
-def set_prototype
+ def set_prototype
   @prototype = Prototype.find(params[:id])
-end
+ end
 
  def contributor_confirmation
   redirect_to root_path unless current_user == @prototype.user
-end
+ end
 end
